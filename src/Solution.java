@@ -1,6 +1,4 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 public class Solution {
     public int[] twoSum(int[] nums, int target) {
@@ -63,4 +61,34 @@ public class Solution {
         }
         return ans;
     }
+
+    public int singleNumber(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for(int x: nums){
+            if (set.contains(x)){
+                set.remove(x);
+            }else {
+                set.add(x);
+            }
+        }
+        return set.stream().findFirst().get();
+    }
+
+
+    static final HashMap<String,Integer> dict = new HashMap<String,Integer>(){{
+       put("type",0);
+       put("color",1);
+       put("name",2); // O(1)
+    }};
+    public int countMatches(List<List<String>> items, String ruleKey, String ruleValue) {
+        int count = 0;
+        int indexList = dict.get(ruleKey); //O(1)
+        for (List list: items) {  //(n/3)
+            if(list.get(indexList).equals(ruleValue))
+                count++;
+        }
+        return count;
+    }
+
+
 }
